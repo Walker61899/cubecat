@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ca">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cubecat</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        
+        <style>
+            @font-face {
+                font-family: 'Cubecat';
+                src: url('../Minecraft-reloaded.otf') format('opentype');
+                font-weight: 400;
+            }
+
+            @font-face {
+                font-family: 'Cubecat';
+                src: url('../Minecraft-Bold-reloaded.otf') format('opentype');
+                font-weight: 700;
+            }
+
+            /* Bloquegem el scroll a la pàgina principal */
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                overflow: hidden; 
+            }
+
+            /* Contenidor que força l'estructura vertical */
+            .viewport-wrapper {
+                display: flex;
+                flex-direction: column;
+                height: 100vh; /* Alçada total de la pantalla */
+                width: 100vw;
+            }
+
+            /* L'iframe s'estira per ocupar tot l'espai restant */
+            .iframe-expand {
+                flex-grow: 1; /* Aquesta és la clau: agafa l'espai que sobra */
+                border: none;
+                width: 100%;
+                display: block;
+            }
+        </style>
+
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            'cubecat': ['Cubecat', 'sans-serif'],
+                        }
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body class="bg-gray-50 text-gray-900 font-cubecat">
+
+        <div class="viewport-wrapper">
+            
+            <header class="flex-none z-50 w-full shadow-sm">
+                <div class="bg-[#333333] text-white text-lg py-2">
+                    <div class="max-w-4xl mx-auto px-2 flex justify-between items-center">
+                        <div class="flex items-center gap-2 font-bold text-xl pl-4">
+                            <span>⁞</span> cubecat
+                        </div>
+                        <div class="flex gap-4 text-sm pr-4">
+                            <div class="flex items-center gap-2 cursor-pointer group" onclick="navigator.clipboard.writeText('mc.cubecat.cat'); const s = this.querySelector('.ip-content'); s.innerText = 'IP Copiada!'; setTimeout(() => s.innerText = 'mc.cubecat.cat', 1000);">
+                                <span title="Clica per copiar">IP: <span class="ip-content group-hover:underline">mc.cubecat.cat</span></span>
+                            </div>
+                            <div class="border-l border-gray-600 mx-2"></div>
+                            <div>
+                                <a href="https://discord.com/servers/cubecat-904876097680855111" class="hover:underline">Discord</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <nav class="bg-white/75 backdrop-blur-md border-b border-gray-200">
+                    <div class="max-w-4xl mx-auto px-2">
+                        <div class="flex gap-4 md:gap-12 text-sm pt-4 pb-2 overflow-x-auto pl-5">
+                            <a href="../" class="pb-3 pt-2 px-2 md:px-6 text-gray-800 border-b-2 border-white/0 hover:border-red-700 whitespace-nowrap">Inici</a>
+                            <a href="#" class="pb-3 pt-2 px-2 md:px-6 border-b-2 border-white/0 text-gray-800 hover:border-red-700 whitespace-nowrap">Temes</a>
+                            <a href="#" class="pb-3 pt-2 px-2 md:px-6 border-b-2 border-white/0 text-gray-800 hover:border-red-700 whitespace-nowrap">Tràmits</a>
+                            <a href="#" class="pb-3 pt-2 px-2 md:px-6 border-b-2 border-white/0 text-gray-800 hover:border-red-700 whitespace-nowrap">Generalitat</a>
+                            <a href="#" class="pb-3 pt-2 px-2 md:px-6 border-b-2 border-white/0 text-gray-800 hover:border-red-700 whitespace-nowrap">Mapa</a>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+
+            <iframe 
+                src="https://script.google.com/macros/s/AKfycbyJwL5txoYp2ZNtNIHvtSRNQogjeTuw3PZ2cHX1TaA6eVBMFERAjCrugyVn1yXpwVNe2A/exec" 
+                class="iframe-expand"
+                frameborder="0"
+                allowfullscreen>
+            </iframe>
+
+        </div> 
+    </body>
+</html>
