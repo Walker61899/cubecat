@@ -30,6 +30,51 @@
                     }
                 }
             }
+
+            // Funció per obrir/tancar el menú principal
+            function toggleMenu(seccio) {
+                const menu = document.getElementById('mega-menu');
+                const conts = {
+                    'temes': document.getElementById('contingut-temes'),
+                    'tramits': document.getElementById('contingut-tramits'),
+                    'generalitat': document.getElementById('contingut-generalitat')
+                };
+
+                // Si tornem a clicar la mateixa, tanquem
+                if (!menu.classList.contains('hidden') && !conts[seccio].classList.contains('hidden')) {
+                    menu.classList.add('hidden');
+                    return;
+                }
+
+                // Amaguem tots i mostrem el que toca
+                Object.values(conts).forEach(c => c.classList.add('hidden'));
+                conts[seccio].classList.remove('hidden');
+                menu.classList.remove('hidden');
+
+                // Opcional: Obrir la primera sub-secció per defecte
+                if (seccio === 'generalitat') subdesplegable('nav-gen-info');
+            }
+
+            // Funció per gestionar els sub-apartats interiors
+            function subdesplegable(id) {
+                // Amaguem tots els sub-navegadors
+                const subs = document.querySelectorAll('.sub-navegacio');
+                subs.forEach(s => s.classList.add('hidden'));
+                
+                // Mostrem el seleccionat
+                const target = document.getElementById(id);
+                if (target) {
+                    target.classList.remove('hidden');
+                }
+            }
+
+            // Tancar menú si es clica fora
+            window.onclick = function(event) {
+                const menu = document.getElementById('mega-menu');
+                if (!event.target.closest('nav') && !event.target.closest('#mega-menu')) {
+                    menu.classList.add('hidden');
+                }
+            }
         </script>
     </head>
     <body class="bg-gray-50 text-gray-900 font-cubecat">
@@ -57,13 +102,103 @@
                     <div class="max-w-4xl mx-auto px-4">
                         <div class="flex gap-4 md:gap-12 text-sm pt-4 pb-2 overflow-x-auto pl-5">
                             <a href="./" class="pb-3 pt-2 px-2 md:px-6 border-b-2 border-red-400/70 text-gray-800 whitespace-nowrap">Inici</a>
-                            <a href="#" class="pb-3 pt-2 px-2 md:px-6 border-b-2 border-white/0 text-gray-800 hover:border-red-700 whitespace-nowrap">Temes</a>
-                            <a href="#" class="pb-3 pt-2 px-2 md:px-6 border-b-2 border-white/0 text-gray-800 hover:border-red-700 whitespace-nowrap">Tràmits</a>
-                            <a href="#" class="pb-3 pt-2 px-2 md:px-6 border-b-2 border-white/0 text-gray-800 hover:border-red-700 whitespace-nowrap">Generalitat</a>
+                            
+                            <a href="javascript:void(0)" onclick="toggleMenu('temes')" class="pb-3 pt-2 px-2 md:px-6 border-b-2 border-white/0 text-gray-800 hover:border-red-700 whitespace-nowrap">Temes</a>
+                            <a href="javascript:void(0)" onclick="toggleMenu('tramits')" class="pb-3 pt-2 px-2 md:px-6 border-b-2 border-white/0 text-gray-800 hover:border-red-700 whitespace-nowrap">Tràmits</a>
+                            <a href="javascript:void(0)" onclick="toggleMenu('generalitat')" class="pb-3 pt-2 px-2 md:px-6 border-b-2 border-white/0 text-gray-800 hover:border-red-700 whitespace-nowrap">Generalitat</a>
+                            
                             <a href="#" class="pb-3 pt-2 px-2 md:px-6 border-b-2 border-white/0 text-gray-800 hover:border-red-700 whitespace-nowrap">Mapa</a>
                         </div>
                     </div>
                 </nav>
+
+                <div id="mega-menu" class="hidden absolute w-full bg-white shadow-xl border-b border-gray-200">
+                    <div id="contingut-temes" class="hidden max-w-4xl mx-auto flex px-5">
+                        <ul class="w-fit border-r border-zinc-300 pr-5 m-5">
+                            <li class="p-3">
+                                <a class="cursor-pointer text-zinc-600 hover:text-black flex items-center group" onclick="subdesplegable('nav-justicia')">
+                                    Justícia
+                                    <svg class="w-2 ml-2 fill-zinc-600 group-hover:fill-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg>
+                                </a>
+                            </li>
+                            <li class="p-3"><a class="cursor-pointer text-zinc-600 hover:text-black flex items-center group" onclick="subdesplegable('nav-mobilitat')">Mobilitat i Transport <svg class="w-2 ml-2 fill-zinc-600 group-hover:fill-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></a></li>
+                            <li class="p-3"><a class="cursor-pointer text-zinc-600 hover:text-black flex items-center group" onclick="subdesplegable('nav-territori')">Territori <svg class="w-2 ml-2 fill-zinc-600 group-hover:fill-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></a></li>
+                            <li class="p-3"><a class="cursor-pointer text-zinc-600 hover:text-black flex items-center group" onclick="subdesplegable('nav-economia')">Economia <svg class="w-2 ml-2 fill-zinc-600 group-hover:fill-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></a></li>
+                            <li class="p-3"><a class="cursor-pointer text-zinc-600 hover:text-black flex items-center group" onclick="subdesplegable('nav-cultura')">Cultura i Turisme <svg class="w-2 ml-2 fill-zinc-600 group-hover:fill-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></a></li>
+                            <li class="p-3"><a class="cursor-pointer text-zinc-600 hover:text-black flex items-center group" onclick="subdesplegable('nav-mitjans')">Mitjans <svg class="w-2 ml-2 fill-zinc-600 group-hover:fill-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></a></li>
+                            <li class="p-3"><a class="cursor-pointer text-zinc-600 hover:text-black flex items-center group" href="#">Emergències</a></li>
+                        </ul>
+
+                        <div class="flex-1">
+                            <ul id="nav-justicia" class="sub-navegacio hidden p-5">
+                                <li class="p-3"><a href="#" class="hover:underline">Butlletí Oficial de la Generalitat de Cubecat</a></li>
+                                <li class="p-3"><a href="#" class="hover:underline">Registres Públics</a></li>
+                                <li class="p-3"><a href="#" class="hover:underline">ICAC</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="contingut-tramits" class="hidden max-w-4xl mx-auto flex px-5">
+                        <ul class="w-fit border-r border-zinc-300 pr-5 m-5">
+                            <li class="p-3">
+                                <a class="cursor-pointer text-zinc-600 hover:text-black flex items-center group" onclick="subdesplegable('nav-tramits-inici')">
+                                    Començar a jugar
+                                    <svg class="w-2 ml-2 fill-zinc-600 group-hover:fill-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg>
+                                </a>
+                            </li>
+                            <li class="p-3">
+                                <a class="cursor-pointer text-zinc-600 hover:text-black flex items-center group" onclick="subdesplegable('nav-tramits-servidor')">
+                                    Gestions al servidor
+                                    <svg class="w-2 ml-2 fill-zinc-600 group-hover:fill-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg>
+                                </a>
+                            </li>
+                            <li class="p-3">
+                                <a class="cursor-pointer text-zinc-600 hover:text-black flex items-center group" onclick="subdesplegable('nav-tramits-pobles')">
+                                    Municipis i Mapa
+                                    <svg class="w-2 ml-2 fill-zinc-600 group-hover:fill-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div class="flex-1">
+                            <ul id="nav-tramits-inici" class="sub-navegacio hidden p-5">
+                                <li class="p-3"><a href="#" class="hover:underline">Com enregistrar-se al joc?</a></li>
+                                <li class="p-3"><a href="#" class="hover:underline">Com fer-se Ciutadà?</a></li>
+                                <li class="p-3"><a href="#" class="hover:underline">Com fer-se el DNI per participar a les vegueries?</a></li>
+                                <li class="p-3"><a href="#" class="hover:underline">Com puc vincular el discord amb el meu usuari?</a></li>
+                            </ul>
+
+                            <ul id="nav-tramits-servidor" class="sub-navegacio hidden p-5">
+                                <li class="p-3"><a href="#" class="hover:underline">Com puc posar una denúncia?</a></li>
+                                <li class="p-3"><a href="#" class="hover:underline">Com puc sol·licitar una llicència de joc d'atzar?</a></li>
+                                <li class="p-3"><a href="#" class="hover:underline">Com puc ser advocat?</a></li>
+                            </ul>
+
+                            <ul id="nav-tramits-pobles" class="sub-navegacio hidden p-5">
+                                <li class="p-3"><a href="#" class="hover:underline">Com demanar un municipi per fer-lo?</a></li>
+                                <li class="p-3"><a href="#" class="hover:underline">Com aconsegueixo que el meu poble aparegui al mapa?</a></li>
+                                <li class="p-3"><a href="#" class="hover:underline">Com puc demanar una botiga administrativa al meu poble?</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="contingut-generalitat" class="hidden max-w-4xl mx-auto flex px-5 items-center">
+    
+    <ul class="flex-1 border-r border-zinc-300 pr-5 m-5">
+        <li class="p-3"><a class="cursor-pointer text-zinc-600 hover:text-black flex items-center group" href="#">Què és la Generalitat a Cubecat?</a></li>
+        <li class="p-3"><a class="cursor-pointer text-zinc-600 hover:text-black flex items-center group" href="#">Consellers</a></li>
+        <li class="p-3"><a class="cursor-pointer text-zinc-600 hover:text-black flex items-center group" href="#">Funcionaris</a></li>
+        <li class="p-3"><a class="cursor-pointer text-zinc-600 hover:text-black flex items-center group" href="#">BOGC - Butlletí Oficial de la Generalitat de Cubecat</a></li>
+    </ul>
+
+    <div class="w-64 h-40 bg-gray-100 rounded-lg overflow-hidden border border-dashed border-gray-300 flex-shrink-0">
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/057/068/323/small/single-fresh-red-strawberry-on-table-green-background-food-fruit-sweet-macro-juicy-plant-image-photo.jpg" 
+             alt="Publicitat" 
+             class="w-full h-full object-cover">
+    </div>
+
+</div>
+                </div>
             </header>
 
         <div class="bg-gray-100 w-full pt-8 pb-10">
