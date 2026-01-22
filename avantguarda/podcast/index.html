@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ca" class="bg-white">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>L'Avantguarda - Podcasts</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap');
+            @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+            
+            body {
+                font-family: 'Cubecat', sans-serif;
+                color: #1a1a1a;
+            }
+            
+            .headline {
+                /* font-family: 'Playfair Display', serif; */
+                letter-spacing: -0.02em;
+            }
+
+            .lv-logo-container {
+                background-color: #001c4c;
+            }
+
+            .lv-logo {
+                font-family: 'Titol', sans-serif;
+                font-weight: normal;
+                font-style: normal;
+                font-size: 2.2rem;
+                letter-spacing: -1.5px;
+                color: #ffffff;
+                line-height: 1;
+            }
+
+            .nav-link {
+                transition: color 0.2s;
+            }
+
+            @font-face {
+                font-family: 'Cubecat';
+                src: url('../../Minecraft-reloaded.otf') format('opentype');
+                font-weight: 400;
+            }
+
+            @font-face {
+                font-family: 'Cubecat';
+                src: url('../../Minecraft-Bold-reloaded.otf') format('opentype');
+                font-weight: 700;
+            }
+
+            @font-face {
+                font-family: 'Mini';
+                src: url('../../Minecraft-Mini.otf') format('opentype');
+                font-weight: normal;
+            }
+
+            @font-face {
+                font-family: 'Titol';
+                src: url('./minecraft-title.ttf') format('truetype'), url('./minecraft-title.ttf') format('woff'), url('./minecraft-title.ttf') format('opentype');
+                font-weight: normal;
+            }
+        </style>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            'titol': ['Titol', 'sans-serif'],
+                            'cubecat': ['Cubecat', 'sans-serif'],
+                            'mini': ['Mini', 'sans-serif']
+                        }
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body class="antialiased text-gray-900 bg-white">
+
+        <!-- BARRA SUPERIOR -->
+        <div class="border-b border-gray-100 py-1 hidden lg:block bg-gray-50">
+            <div class="max-w-[1200px] mx-auto px-4 flex items-center gap-6 text-[10px] font-bold uppercase tracking-tight text-gray-500">
+                <span class="text-blue-900">Interès d'avui</span>
+                <a href="#" class="hover:underline">Estat del Regne</a>
+                <a href="#" class="hover:underline">Preu del Blat</a>
+                <a href="#" class="hover:underline">Guerra dels Clans</a>
+                <a href="#" class="hover:underline text-red-600">Directe Twitch</a>
+            </div>
+        </div>
+
+        <!-- HEADER PRINCIPAL -->
+        <header class="lv-logo-container text-cubecat sticky top-0 z-50 border-b border-white">
+            <div class="max-w-[1200px] mx-auto px-4 flex flex-col items-center py-3">
+                <div class="flex-none">
+                    <h1 class="lv-logo text-[30px] uppercase text-center tracking-tight">L'AVANTGUARDA</h1>
+                </div>
+            </div>
+        </header>
+
+        <!-- NAVEGACIÓ DE SECCIONS -->
+        <nav class="bg-[#eaede2]">
+            <div class="max-w-[1200px] mx-auto px-4 py-2 flex justify-center gap-8 text-[25px] font-titol text-[#001c4c]/50 tracking-wide">
+                <!-- <a href="#" class="nav-link hover:text-[#001c4c] border-b-2 border-transparent hover:border-[#001c4c] pb-0.5">Inici</a>
+                <a href="#" class="nav-link hover:text-[#001c4c] border-b-2 border-transparent hover:border-[#001c4c] pb-0.5">Pobles</a>
+                <a href="#" class="nav-link hover:text-[#001c4c] border-b-2 border-transparent hover:border-[#001c4c] pb-0.5">Economia</a>
+                <a href="#" class="nav-link hover:text-[#001c4c] border-b-2 border-transparent hover:border-[#001c4c] pb-0.5">Política</a>
+                <a href="#" class="nav-link hover:text-[#001c4c] border-b-2 border-transparent hover:border-[#001c4c] pb-0.5">Cultura</a> -->
+                <a href="#" class="nav-link hover:text-[#001c4c] text-[#001c4c]">Podcast</a>
+            </div>
+        </nav>
+        
+        <div class="mx-auto px-4 pt-2 flex justify-center gap-8 text-[15px] font-titol text-gray-900 tracking-wide">
+            <span class="font-mini">safareig fosa / diari d'anserall / el crit / l'avantguarda</span>
+        </div>
+
+        <!-- COS PRINCIPAL (PODCASTS) -->
+        <main class="max-w-[1200px] mx-auto px-8 lg:px-24 pt-8 pb-16">
+            
+            <h2 class="text-[15px] font-bold text-[#37709f] mb-8 tracking-wide uppercase text-left border-y border-[#37709f] py-1 pl-2">Els nostres programes</h2>
+
+            <!-- Quadrícula de 3 columnes només per a caràtules -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+                
+                <!-- Caràtula 1 -->
+                <div class="group border-gray-200 border hover:border-gray-600 cursor-pointer transition-colors duration-200 bg-white" onclick="playPodcast('./audios/podcast_01.mp3', 'Episodi 1: Metralleta Robellada', './caràtules/podcast_01.png')">
+                    <div class="p-2.5 aspect-square overflow-hidden relative">
+                        <img src="./caràtules/podcast_01.png" class="w-full h-full object-cover transition duration-500" alt="[Imatge de Caràtula de Podcast 1]">
+                    </div>
+                </div>
+
+                <!-- Caràtula 2 -->
+                <div class="group border-gray-200 border hover:border-gray-600 cursor-pointer transition-colors duration-200" onclick="playPodcast('./audios/podcast_02.mp3', 'Episodi 2: Converses al bosc', 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=600&h=600&fit=crop')">
+                    <div class="p-2.5 aspect-square overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=600&h=600&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500" alt="[Imatge de Caràtula de Podcast 2]">
+                    </div>
+                </div>
+
+                <!-- Caràtula 3 -->
+                <div class="group border-gray-200 border hover:border-gray-600 cursor-pointer transition-colors duration-200" onclick="playPodcast('./audios/podcast_03.mp3', 'Episodi 3: Medicina moderna', 'https://images.unsplash.com/photo-1559523161-0fc0d8b38a7a?q=80&w=600&h=600&fit=crop')">
+                    <div class="p-2.5 aspect-square overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1559523161-0fc0d8b38a7a?q=80&w=600&h=600&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500" alt="[Imatge de Caràtula de Podcast 3]">
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- PEU DE PÀGINA -->
+        <footer class="bg-gray-50 border-t border-gray-200 py-8 text-center">
+            <div class="flex justify-center gap-8 text-[11px] font-bold text-gray-500 uppercase tracking-widest">
+                <a href="#" class="hover:text-black">Newsletter</a>
+                <a href="#" class="hover:text-black">Arxiu</a>
+                <a href="#" class="hover:text-black">Mapa Web</a>
+                <a href="#" class="hover:text-black">Contacte</a>
+            </div>
+
+            <div class="font-mini text-gray-300 text-2xl pt-8">walker ind.</div>
+
+            <p class="text-[10px] text-gray-400 mt-5 tracking-widest uppercase" style="font-family: 'Libre Franklin', sans-serif;">&copy; Cubecat 2026 - Tots els drets reservats.</p>
+        </footer>
+
+        <!-- REPRODUCTOR STICKY -->
+        <div id="audio-player-bar" class="fixed bottom-0 left-0 w-full bg-[#001c4c] text-white p-4 transform translate-y-full transition-transform duration-500 shadow-[0_-4px_10px_rgba(0,0,0,0.3)] z-50 flex items-center justify-between gap-4 border-t border-white/10">
+            
+            <!-- Botó Plegar/Desplegar -->
+            <button id="player-toggle-btn" onclick="togglePlayerBar()" class="absolute -top-10 left-1/2 -translate-x-1/2 text-gray-700 hover:text-gray-900 w-12 h-10 flex items-center justify-center transition-colors hidden group">
+                <i class="fas fa-chevron-down text-2xl drop-shadow-sm transition-transform duration-500 group-hover:scale-110" id="player-toggle-icon"></i>
+            </button>
+
+            <!-- Info Podcast -->
+            <div class="flex items-center gap-4 flex-1 overflow-hidden">
+                <div class="w-12 h-12 bg-gray-800 flex-shrink-0 rounded overflow-hidden shadow-md relative group">
+                    <img id="player-cover" src="" class="w-full h-full object-cover hidden">
+                    <div id="player-placeholder" class="w-full h-full flex items-center justify-center bg-white/10 text-white/50">
+                        <i class="fas fa-music"></i>
+                    </div>
+                </div>
+                <div class="min-w-0 flex flex-col justify-center">
+                    <h4 id="player-title" class="font-titol text-sm truncate leading-tight">Selecciona un podcast</h4>
+                    <p class="font-titol text-[10px] text-gray-400 truncate uppercase tracking-wider mt-0.5">L'Avantguarda</p>
+                </div>
+            </div>
+
+            <!-- Controls Centrals -->
+            <div class="flex flex-col items-center flex-[2] max-w-lg">
+                <div class="flex items-center gap-6 mb-2">
+                    <button class="text-gray-400 hover:text-white transition text-sm"><i class="fas fa-backward-step"></i></button>
+                    <button id="play-pause-btn" onclick="togglePlay()" class="w-10 h-10 bg-white text-[#001c4c] rounded-full flex items-center justify-center hover:scale-110 transition shadow-lg shadow-white/10">
+                        <i class="fas fa-play pl-1"></i>
+                    </button>
+                    <button class="text-gray-400 hover:text-white transition text-sm"><i class="fas fa-forward-step"></i></button>
+                </div>
+                <div class="w-full flex items-center gap-3 text-[10px] font-mono text-gray-400">
+                    <span id="current-time">00:00</span>
+                    <div class="flex-1 relative h-1 bg-gray-700 rounded-full cursor-pointer group">
+                        <input type="range" id="seek-slider" class="absolute w-full h-full opacity-0 cursor-pointer z-10" value="0" max="100">
+                        <div id="progress-bar" class="h-full bg-blue-500 rounded-full w-0 group-hover:bg-blue-400 transition-colors relative">
+                            <div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow"></div>
+                        </div>
+                    </div>
+                    <span id="duration">00:00</span>
+                </div>
+            </div>
+
+            <!-- Volum (Desktop) -->
+            <div class="flex-1 justify-end items-center gap-3 hidden md:flex">
+                <button id="mute-btn" class="text-gray-400 hover:text-white transition"><i class="fas fa-volume-high text-xs"></i></button>
+                <div class="w-20 h-1 bg-gray-700 rounded-full relative group">
+                    <input type="range" id="volume-slider" class="absolute w-full h-full opacity-0 cursor-pointer z-10" value="100" max="100">
+                    <div id="volume-progress" class="h-full bg-gray-400 rounded-full w-full group-hover:bg-white transition-colors relative"></div>
+                </div>
+            </div>
+            
+            <audio id="main-audio"></audio>
+        </div>
+
+        <script>
+            const audio = document.getElementById('main-audio');
+            const playerBar = document.getElementById('audio-player-bar');
+            const playBtn = document.getElementById('play-pause-btn');
+            const titleEl = document.getElementById('player-title');
+            const coverEl = document.getElementById('player-cover');
+            const placeholderEl = document.getElementById('player-placeholder');
+            const slider = document.getElementById('seek-slider');
+            const progressEl = document.getElementById('progress-bar');
+            const currTimeEl = document.getElementById('current-time');
+            const durEl = document.getElementById('duration');
+            const volumeSlider = document.getElementById('volume-slider');
+            const volumeProgress = document.getElementById('volume-progress');
+            const muteBtn = document.getElementById('mute-btn');
+            const toggleBtn = document.getElementById('player-toggle-btn');
+            const toggleIcon = document.getElementById('player-toggle-icon');
+
+            function playPodcast(src, title, cover) {
+                audio.src = src;
+                titleEl.innerText = title;
+                if(cover) { coverEl.src = cover; coverEl.classList.remove('hidden'); placeholderEl.classList.add('hidden'); }
+                toggleBtn.classList.remove('hidden');
+                toggleIcon.style.transform = 'rotate(0deg)';
+                playerBar.classList.remove('translate-y-full');
+                audio.play();
+                updateIcon(true);
+            }
+
+            function togglePlay() {
+                if(audio.paused) { audio.play(); updateIcon(true); }
+                else { audio.pause(); updateIcon(false); }
+            }
+
+            function updateIcon(isPlaying) {
+                playBtn.innerHTML = isPlaying ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play pl-1"></i>';
+            }
+
+            function togglePlayerBar() {
+                if (playerBar.classList.contains('translate-y-full')) {
+                    playerBar.classList.remove('translate-y-full');
+                    toggleIcon.style.transform = 'rotate(0deg)';
+                } else {
+                    playerBar.classList.add('translate-y-full');
+                    toggleIcon.style.transform = 'rotate(180deg)';
+                }
+            }
+
+            audio.ontimeupdate = () => {
+                const pct = (audio.currentTime / audio.duration) * 100 || 0;
+                slider.value = pct;
+                progressEl.style.width = pct + '%';
+                currTimeEl.innerText = fmt(audio.currentTime);
+                durEl.innerText = fmt(audio.duration || 0);
+            };
+
+            slider.oninput = (e) => {
+                const time = (e.target.value / 100) * audio.duration;
+                audio.currentTime = time;
+            };
+
+            const fmt = (s) => {
+                const m = Math.floor(s / 60), sec = Math.floor(s % 60);
+                return `${m}:${sec < 10 ? '0'+sec : sec}`;
+            };
+
+            // Control de volum
+            let lastVolume = 1;
+            volumeSlider.oninput = (e) => {
+                const val = e.target.value;
+                audio.volume = val / 100;
+                volumeProgress.style.width = val + '%';
+                updateVolumeIcon(val);
+            };
+
+            muteBtn.onclick = () => {
+                if (audio.volume > 0) {
+                    lastVolume = audio.volume;
+                    audio.volume = 0;
+                    volumeSlider.value = 0;
+                    volumeProgress.style.width = '0%';
+                    updateVolumeIcon(0);
+                } else {
+                    const vol = lastVolume > 0 ? lastVolume : 1;
+                    audio.volume = vol;
+                    volumeSlider.value = vol * 100;
+                    volumeProgress.style.width = (vol * 100) + '%';
+                    updateVolumeIcon(vol * 100);
+                }
+            };
+
+            function updateVolumeIcon(val) {
+                const icon = muteBtn.querySelector('i');
+                icon.className = '';
+                if (val == 0) icon.className = 'fas fa-volume-xmark text-xs';
+                else if (val < 50) icon.className = 'fas fa-volume-low text-xs';
+                else icon.className = 'fas fa-volume-high text-xs';
+            }
+        </script>
+    </body>
+</html>
