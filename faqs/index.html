@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ca">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Preguntes Freqüents - Cubecat</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        
+        <style>
+            @font-face {
+                font-family: 'Cubecat';
+                src: url('../Minecraft-reloaded.otf') format('opentype');
+                font-weight: 400;
+            }
+
+            @font-face {
+                font-family: 'Cubecat';
+                src: url('../Minecraft-Bold-reloaded.otf') format('opentype');
+                font-weight: 700;
+            }
+        </style>
+
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            'cubecat': ['Cubecat', 'sans-serif'],
+                        }
+                    }
+                }
+            }
+
+            // Funció per obrir/tancar el menú principal
+            function toggleMenu(seccio) {
+                const menu = document.getElementById('mega-menu');
+                const conts = {
+                    'temes': document.getElementById('contingut-temes'),
+                    'tramits': document.getElementById('contingut-tramits'),
+                    'generalitat': document.getElementById('contingut-generalitat')
+                };
+
+                // Si es torna a clicar la mateixa, es tanca
+                if (!menu.classList.contains('hidden') && !conts[seccio].classList.contains('hidden')) {
+                    menu.classList.add('hidden');
+                    return;
+                }
+
+                // S'amaguen tots i es mostra el que toca
+                Object.values(conts).forEach(c => c.classList.add('hidden'));
+                conts[seccio].classList.remove('hidden');
+                menu.classList.remove('hidden');
+
+                // Opcional: Obrir la primera sub-secció per defecte
+                if (seccio === 'generalitat') subdesplegable('nav-gen-info');
+            }
+
+            // Funció per gestionar els sub-apartats interiors
+            function subdesplegable(id) {
+                // S'amaguen tots els sub-navegadors
+                const subs = document.querySelectorAll('.sub-navegacio');
+                subs.forEach(s => s.classList.add('hidden'));
+                
+                // Mostrar el seleccionat
+                const target = document.getElementById(id);
+                if (target) {
+                    target.classList.remove('hidden');
+                }
+            }
+
+            // Tancar menú si es clica fora
+            window.onclick = function(event) {
+                const menu = document.getElementById('mega-menu');
+                if (!event.target.closest('nav') && !event.target.closest('#mega-menu')) {
+                    menu.classList.add('hidden');
+                }
+            }
+
+            // 1. Funció per obrir/tancar el menú mòbil principal
+            function toggleMobileMenu() {
+                const navLinks = document.getElementById('nav-links');
+                const megaMenu = document.getElementById('mega-menu');
+                
+                navLinks.classList.toggle('hidden');
+                
+                // Si es tanca el menú principal, es tanca també el mega-menu per neteja
+                if (navLinks.classList.contains('hidden')) {
+                    megaMenu.classList.add('hidden');
+                }
+            }
+
+            // 2. Funció per mostrar els Temes, Tràmits, etc (Mega Menu)
+            function toggleMenu(id) {
+                const megaMenu = document.getElementById('mega-menu');
+                const contents = ['contingut-temes', 'contingut-tramits', 'contingut-generalitat'];
+                const selectedContent = document.getElementById('contingut-' + id);
+                
+                // Si el mega-menu està tancat, l'obre
+                if (megaMenu.classList.contains('hidden')) {
+                    megaMenu.classList.remove('hidden');
+                    // S'amaguen tots primer
+                    contents.forEach(c => document.getElementById(c).classList.add('hidden'));
+                    // Es mostra el seleccionat
+                    selectedContent.classList.remove('hidden');
+                } else {
+                    // Si ja és obert, comprova si es clica al mateix o a un altre
+                    if (!selectedContent.classList.contains('hidden')) {
+                        // Si és el mateix, es tanca tot el menú
+                        megaMenu.classList.add('hidden');
+                    } else {
+                        // Si és un altre, canvia el contingut visible
+                        contents.forEach(c => document.getElementById(c).classList.add('hidden'));
+                        selectedContent.classList.remove('hidden');
+                    }
+                }
+            }
+
+            // 3. Funció per als sub-apartats (Ex: Justicia, Mobilitat...)
+            function subdesplegable(id) {
+                // Amagar tots els sub-menus primer (per a que només n'hi hagi un d'obert)
+                const allSubs = document.querySelectorAll('.sub-navegacio');
+                allSubs.forEach(el => {
+                    if (el.id !== id) el.classList.add('hidden');
+                });
+
+                const target = document.getElementById(id);
+                if (target) {
+                    target.classList.toggle('hidden');
+                }
+            }
+        </script>
+    </head>
+    <body class="bg-gray-50 text-gray-900 font-cubecat">
+
+        <div class="sticky top-0 z-50 w-full font-cubecat">
+            <header class="flex-none z-50 w-full shadow-sm">
+                
+                <div class="bg-[#333333] text-white text-lg py-2">
+                    <div class="max-w-4xl mx-auto px-4 flex justify-between items-center">
+                        <div class="flex items-center gap-2 font-bold text-xl pl-2 md:pl-4">
+                            <span>⁞</span> cubecat
+                        </div>
+                        <div class="hidden sm:flex gap-4 text-sm pr-4">
+                            <div class="flex items-center gap-2 cursor-pointer group" onclick="navigator.clipboard.writeText('mc.cubecat.cat'); const s = this.querySelector('.ip-content'); s.innerText = 'IP Copiada!'; setTimeout(() => s.innerText = 'mc.cubecat.cat', 1000);">
+                                <span title="Clica per copiar">IP: <span class="ip-content group-hover:underline">mc.cubecat.cat</span></span>
+                            </div>
+                            <div class="border-l border-gray-600 mx-2"></div>
+                            <div>
+                                <a href="https://discord.com/servers/cubecat-904876097680855111" class="hover:underline">Discord</a>
+                            </div>
+                        </div>
+                        <div class="sm:hidden text-sm pr-2">
+                            <div onclick="navigator.clipboard.writeText('mc.cubecat.cat'); const s = this.querySelector('.ip-content'); s.innerText = 'IP Copiada!'; setTimeout(() => s.innerText = 'mc.cubecat.cat', 1000);">
+                                <span class="ip-content hover:underline">mc.cubecat.cat</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <nav class="bg-white/95 backdrop-blur-md border-b border-gray-200 relative">
+                    <div class="max-w-4xl mx-auto px-4">
+                        <div class="flex justify-between md:justify-start items-center py-2 md:py-0">
+                            
+                            <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-600 hover:text-red-500 focus:outline-none">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                                </svg>
+                            </button>
+
+                            <div id="nav-links" class="hidden md:flex flex-col md:flex-row w-full md:w-auto md:gap-12 text-sm pt-2 md:pt-4 pb-2 absolute md:static top-full left-0 bg-white md:bg-transparent shadow-lg md:shadow-none z-40">
+                                <a href="./" class="block py-3 px-6 md:px-2 border-b md:border-b-2 border-gray-100 md:border-red-400/70 text-gray-800 whitespace-nowrap">
+                                    Inici
+                                </a>
+                                
+                                <a href="javascript:void(0)" onclick="toggleMenu('temes')" class="block py-3 px-6 md:px-2 border-b md:border-b-2 border-gray-100 md:border-white/0 text-gray-800 hover:bg-gray-50 md:hover:bg-transparent md:hover:border-red-700 whitespace-nowrap flex justify-between items-center">
+                                    Temes <span class="md:hidden text-xs">▼</span>
+                                </a>
+                                
+                                <a href="javascript:void(0)" onclick="toggleMenu('tramits')" class="block py-3 px-6 md:px-2 border-b md:border-b-2 border-gray-100 md:border-white/0 text-gray-800 hover:bg-gray-50 md:hover:bg-transparent md:hover:border-red-700 whitespace-nowrap flex justify-between items-center">
+                                    Tràmits <span class="md:hidden text-xs">▼</span>
+                                </a>
+                                
+                                <a href="javascript:void(0)" onclick="toggleMenu('generalitat')" class="block py-3 px-6 md:px-2 border-b md:border-b-2 border-gray-100 md:border-white/0 text-gray-800 hover:bg-gray-50 md:hover:bg-transparent md:hover:border-red-700 whitespace-nowrap flex justify-between items-center">
+                                    Generalitat <span class="md:hidden text-xs">▼</span>
+                                </a>
+                                
+                                <a href="#" class="block py-3 px-6 md:px-2 border-b md:border-b-2 border-gray-100 md:border-white/0 text-gray-800 hover:bg-gray-50 md:hover:bg-transparent md:hover:border-red-700 whitespace-nowrap">Mapa</a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <div id="mega-menu" class="hidden absolute w-full bg-white shadow-xl border-b border-gray-200 max-h-[80vh] overflow-y-auto">
+                    
+                    <div id="contingut-temes" class="hidden max-w-4xl mx-auto flex flex-col md:flex-row px-0 md:px-5">
+                        <ul class="w-full md:w-fit border-b md:border-b-0 md:border-r border-zinc-300 pr-0 md:pr-5 m-0 md:m-5 bg-gray-50 md:bg-white">
+                            <li class="p-3 border-b border-gray-100 md:border-0">
+                                <a class="cursor-pointer text-zinc-600 hover:text-black flex items-center justify-between md:justify-start group" onclick="subdesplegable('nav-justicia')">
+                                    <span class="flex items-center">Justícia</span>
+                                    <svg class="w-2 ml-2 fill-zinc-600 group-hover:fill-black transform rotate-90 md:rotate-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg>
+                                </a>
+                            </li>
+                            <li class="p-3 border-b border-gray-100 md:border-0"><a class="cursor-pointer text-zinc-600 hover:text-black flex items-center justify-between md:justify-start group" onclick="subdesplegable('nav-mobilitat')">Mobilitat i Transport <svg class="w-2 ml-2 fill-zinc-600 group-hover:fill-black transform rotate-90 md:rotate-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></a></li>
+                            <li class="p-3 border-b border-gray-100 md:border-0"><a class="cursor-pointer text-zinc-600 hover:text-black flex items-center justify-between md:justify-start group" onclick="subdesplegable('nav-territori')">Territori <svg class="w-2 ml-2 fill-zinc-600 group-hover:fill-black transform rotate-90 md:rotate-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></a></li>
+                            <li class="p-3 border-b border-gray-100 md:border-0"><a class="cursor-pointer text-zinc-600 hover:text-black flex items-center justify-between md:justify-start group" onclick="subdesplegable('nav-economia')">Economia <svg class="w-2 ml-2 fill-zinc-600 group-hover:fill-black transform rotate-90 md:rotate-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></a></li>
+                            <li class="p-3 border-b border-gray-100 md:border-0"><a class="cursor-pointer text-zinc-600 hover:text-black flex items-center justify-between md:justify-start group" onclick="subdesplegable('nav-cultura')">Cultura i Turisme <svg class="w-2 ml-2 fill-zinc-600 group-hover:fill-black transform rotate-90 md:rotate-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></a></li>
+                            <li class="p-3 border-b border-gray-100 md:border-0"><a class="cursor-pointer text-zinc-600 hover:text-black flex items-center justify-between md:justify-start group" onclick="subdesplegable('nav-mitjans')">Mitjans <svg class="w-2 ml-2 fill-zinc-600 group-hover:fill-black transform rotate-90 md:rotate-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></a></li>
+                            <li class="p-3"><a class="cursor-pointer text-zinc-600 hover:text-black flex items-center group" href="#">Emergències</a></li>
+                        </ul>
+
+                        <div class="flex-1 bg-white">
+                            <ul id="nav-justicia" class="sub-navegacio hidden p-5 bg-gray-50 md:bg-white rounded mb-4 md:mb-0">
+                                <li class="p-3"><a href="#" class="hover:underline block">Butlletí Oficial de la Generalitat de Cubecat</a></li>
+                                <li class="p-3"><a href="#" class="hover:underline block">Registres Públics</a></li>
+                                <li class="p-3"><a href="#" class="hover:underline block">ICAC</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="contingut-tramits" class="hidden max-w-4xl mx-auto flex flex-col md:flex-row px-0 md:px-5">
+                        <ul class="w-full md:w-fit border-b md:border-b-0 md:border-r border-zinc-300 pr-0 md:pr-5 m-0 md:m-5 bg-gray-50 md:bg-white">
+                            <li class="p-3 border-b border-gray-100 md:border-0">
+                                <a class="cursor-pointer text-zinc-600 hover:text-black flex items-center justify-between md:justify-start group" onclick="subdesplegable('nav-tramits-inici')">
+                                    Començar a jugar
+                                    <svg class="w-2 ml-2 fill-zinc-600 group-hover:fill-black transform rotate-90 md:rotate-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg>
+                                </a>
+                            </li>
+                            <li class="p-3 border-b border-gray-100 md:border-0">
+                                <a class="cursor-pointer text-zinc-600 hover:text-black flex items-center justify-between md:justify-start group" onclick="subdesplegable('nav-tramits-servidor')">
+                                    Gestions al servidor
+                                    <svg class="w-2 ml-2 fill-zinc-600 group-hover:fill-black transform rotate-90 md:rotate-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg>
+                                </a>
+                            </li>
+                            <li class="p-3">
+                                <a class="cursor-pointer text-zinc-600 hover:text-black flex items-center justify-between md:justify-start group" onclick="subdesplegable('nav-tramits-pobles')">
+                                    Municipis i Mapa
+                                    <svg class="w-2 ml-2 fill-zinc-600 group-hover:fill-black transform rotate-90 md:rotate-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div class="flex-1 bg-white">
+                            <ul id="nav-tramits-inici" class="sub-navegacio hidden p-5 bg-gray-50 md:bg-white rounded mb-4 md:mb-0">
+                                <li class="p-3"><a href="#" class="hover:underline block">Com enregistrar-se al joc?</a></li>
+                                <li class="p-3"><a href="#" class="hover:underline block">Com fer-se Ciutadà?</a></li>
+                                <li class="p-3"><a href="#" class="hover:underline block">Com fer-se el DNI per participar a les vegueries?</a></li>
+                                <li class="p-3"><a href="#" class="hover:underline block">Com puc vincular el discord amb el meu usuari?</a></li>
+                            </ul>
+
+                            <ul id="nav-tramits-servidor" class="sub-navegacio hidden p-5 bg-gray-50 md:bg-white rounded mb-4 md:mb-0">
+                                <li class="p-3"><a href="#" class="hover:underline block">Com puc posar una denúncia?</a></li>
+                                <li class="p-3"><a href="#" class="hover:underline block">Com puc sol·licitar una llicència de joc d'atzar?</a></li>
+                                <li class="p-3"><a href="#" class="hover:underline block">Com puc ser advocat?</a></li>
+                            </ul>
+
+                            <ul id="nav-tramits-pobles" class="sub-navegacio hidden p-5 bg-gray-50 md:bg-white rounded mb-4 md:mb-0">
+                                <li class="p-3"><a href="#" class="hover:underline block">Com demanar un municipi per fer-lo?</a></li>
+                                <li class="p-3"><a href="#" class="hover:underline block">Com aconsegueixo que el meu poble aparegui al mapa?</a></li>
+                                <li class="p-3"><a href="#" class="hover:underline block">Com puc demanar una botiga administrativa al meu poble?</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="contingut-generalitat" class="hidden max-w-4xl mx-auto flex flex-col md:flex-row px-0 md:px-5 items-center md:items-start">
+                        <ul class="flex-1 border-r-0 md:border-r border-zinc-300 pr-0 md:pr-5 m-0 md:m-5 w-full md:w-auto">
+                            <li class="p-3 border-b border-gray-100 md:border-0"><a class="cursor-pointer text-zinc-600 hover:text-black flex items-center group" href="#">Què és la Generalitat a Cubecat?</a></li>
+                            <li class="p-3 border-b border-gray-100 md:border-0"><a class="cursor-pointer text-zinc-600 hover:text-black flex items-center group" href="#">Consellers</a></li>
+                            <li class="p-3 border-b border-gray-100 md:border-0"><a class="cursor-pointer text-zinc-600 hover:text-black flex items-center group" href="#">Funcionaris</a></li>
+                            <li class="p-3"><a class="cursor-pointer text-zinc-600 hover:text-black flex items-center group" href="#">BOGC - Butlletí Oficial de la Generalitat de Cubecat</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="bg-gray-100 w-full pt-8 pb-10">
+            <div class="max-w-4xl mx-auto px-4 py-6">
+                
+                <div class="mb-4 flex items-end gap-2 md:gap-4 overflow-hidden">
+                    <h1 class="text-4xl sm:text-5xl md:text-5xl text-red-700 leading-none flex-shrink-0">
+                        Preguntes freqüents
+                    </h1>
+
+                    <div class="hidden sm:flex flex-col text-[12px] md:text-base font-bold leading-none text-black mb-0.5 md:mb-0.5">
+                        <span class="whitespace-nowrap">Informació, tràmits i serveis</span>
+                        <span class="font-medium pb-2 md:pb-0 -mt-0.5 md:-mt-1 whitespace-nowrap">de la Generalitat de Cubecat</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <main class="max-w-4xl mx-auto px-4 py-8">
+            <h2 class="text-2xl font-bold mb-4 text-black">Preguntes freqüents</h2>
+            
+            <ul class="list-disc pl-5 space-y-2">
+                <li><a href="./faqs/què-és-cubecat-classic" class="text-red-700 font-bold hover:underline">Què és Cubecat Classic?</a></li>
+                <li><a href="./faqs/com-començo-a-jugar" class="text-red-700 font-bold hover:underline">Com començo a jugar?</a></li>
+                <li><a href="./faqs/puc-guanyar-diners" class="text-red-700 font-bold hover:underline">Com puc guanyar diners?</a></li>
+                <li><a href="./faqs/012" class="text-red-700 font-bold hover:underline">Alguna cosa no funciona bé? (012)</a></li>
+                <li><a href="./faqs/com-enregistrar-se-al-joc" class="text-red-700 font-bold hover:underline">Com enregistrar-se al joc?</a></li>
+                <li><a href="./faqs/com-fer-se-ciutada" class="text-red-700 font-bold hover:underline">Com fer-se Ciutadà?</a></li>
+                <li><a href="./faqs/com-fer-se-el-dni-per-participar-a-les-vegueries" class="text-red-700 font-bold hover:underline">Com fer-se el DNI per participar a les vegueries?</a></li>
+                <li><a href="./faqs/com-puc-vincular-el-discord-amb-el-meu-usuari" class="text-red-700 font-bold hover:underline">Com puc vincular el discord amb el meu usuari?</a></li>
+                <li><a href="./faqs/com-puc-posar-una-denuncia" class="text-red-700 font-bold hover:underline">Com puc posar una denúncia?</a></li>
+                <li><a href="./faqs/com-puc-sollicitar-una-llicencia-de-joc-d-atzar" class="text-red-700 font-bold hover:underline">Com puc sol·licitar una llicència de joc d'atzar?</a></li>
+                <li><a href="./faqs/com-puc-ser-advocat" class="text-red-700 font-bold hover:underline">Com puc ser advocat?</a></li>
+                <li><a href="./faqs/com-demanar-un-municipi-per-fer-lo" class="text-red-700 font-bold hover:underline">Com demanar un municipi per fer-lo?</a></li>
+                <li><a href="./faqs/com-aconsegueixo-que-el-meu-poble-aparegui-al-mapa" class="text-red-700 font-bold hover:underline">Com aconsegueixo que el meu poble aparegui al mapa?</a></li>
+                <li><a href="./faqs/com-puc-demanar-una-botiga-administrativa-al-meu-poble" class="text-red-700 font-bold hover:underline">Com puc demanar una botiga administrativa al meu poble?</a></li>
+            </ul>
+
+        </main>
+
+        <footer class="bg-gray-100 text-gray-800 font-pixel text-[10px] mt-10">
+        
+            <!-- Xarxes -->
+            <div class="flex justify-center items-center gap-4 pt-6 pb-4">
+                <a href="https://x.com/CubecatOficial" class="w-10 h-10 bg-zinc-300 hover:bg-zinc-700 rounded-full flex justify-center items-center group" target="_blank">
+                </a>
+                <a href="https://www.instagram.com/cubecatoficial/" class="w-10 h-10 bg-zinc-300 hover:bg-zinc-700 rounded-full flex justify-center items-center group" target="_blank">
+                </a>
+                <a href="https://www.tiktok.com/@cubecat.oficial" class="w-10 h-10 bg-zinc-300 hover:bg-zinc-700 rounded-full flex justify-center items-center group" target="_blank">
+                </a>
+                <a href="https://discord.cubecat.cat/" class="w-10 h-10 bg-zinc-300 hover:bg-zinc-700 rounded-full flex justify-center items-center group" target="_blank">
+                </a>
+            </div>
+
+            <div class="max-w-4xl mx-auto px-4 py-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+
+                    <!-- Sobre Cubecat -->
+                    <div class="lg:col-span-2">
+                        <h3 class="font-bold text-black mb-3">Sobre Cubecat</h3>
+                        <p class="text-gray-600 text-[10px] leading-relaxed mb-2">
+                            Cubecat és una network de servidors de Minecraft en català, gestionada per una comunitat oberta i sense ànim de lucre.
+                        </p>
+                        <p class="text-gray-600 text-[10px] leading-relaxed">
+                            El projecte fomenta la creació col·laborativa, la cultura digital i l'ús del català dins dels videojocs.
+                        </p>
+                    </div>
+
+                    <!-- Legal -->
+                    <div>
+                        <h3 class="font-bold text-black mb-3">Legal</h3>
+                        <ul class="space-y-2 text-gray-600 text-[10px]">
+                            <li><a href="https://cubecat.cat/politica-privacitat/" class="hover:underline hover:text-black">Política de privacitat</a></li>
+                            <li><a href="https://cubecat.cat/avis-legal/" class="hover:underline hover:text-black">Avís legal</a></li>
+                            <li><a href="https://www.minecraft.net/en-us/eula" class="hover:underline hover:text-black">Minecraft EULA</a></li>
+                            <li><a href="#" class="hover:underline hover:text-gray-100">Transparència</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Entitat responsable -->
+                    <div>
+                        <h3 class="font-bold text-black mb-3">Entitat responsable</h3>
+                        <ul class="space-y-2 text-gray-600 text-[10px]">
+                            <li>Associació Cubecat</li>
+                            <li>NIF G22556591</li>
+                            <li>Núm. reg. 77636</li>
+                        </ul>
+                    </div>
+
+                    <!-- Enllaços d'interès -->
+                    <div>
+                        <h3 class="font-bold text-black mb-3">Enllaços d'interès</h3>
+                        <ul class="space-y-2 text-gray-600 text-[10px]">
+                            <li><a href="https://mapa.cubecat.cat" class="hover:underline hover:text-black">Mapa interactiu</a></li>
+                            <li><a href="https://discord.com/invite/kUyVbzD694" class="hover:underline hover:text-black">Servidor de Discord</a></li>
+                            <li><a href="https://wiki.cubecat.cat/main/" class="hover:underline hover:text-black">Wiki de Cubecat</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-[#333333] text-gray-300 py-3 text-xs">
+                <div class="max-w-4xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-2">
+                    <div class="flex items-center gap-2">
+                        <span>⁞ Cubecat &copy; 2026. Catalunya al Minecraft.</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <span>Replicat amb ❤️ per en <a href="https://walker61899.github.io" class="underline hover:text-white">Walker61899</a>, feina original de <a href="https://gabi.work" class="underline hover:text-white">rojoCaotico</a></span>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+    </body>
+</html>
